@@ -1,0 +1,82 @@
+[
+  {
+    "id": "welcome-pack",
+    "title": "New Employee Welcome Pack",
+    "category": "Onboarding",
+    "subject": "Welcome to the Company - IT Access Details",
+    "body": "Hello {full_name},\n\nWelcome to the company. Your initial IT setup is complete.\n\nUsername: {user_name}\nEmail: {email}\nTemporary Password: {temp_password}\n\nPlease sign in and update your password immediately.\nIf you need setup support, contact the IT Service Desk.\n\nBest regards,\nIT Support Team",
+    "tags": ["onboarding", "new hire", "account setup"]
+  },
+  {
+    "id": "vpn-enabled",
+    "title": "VPN Access Enabled",
+    "category": "Access",
+    "subject": "VPN Access Has Been Enabled",
+    "body": "Hello {full_name},\n\nYour VPN access is now enabled.\n\nPlease test connectivity and confirm you can access internal resources.\nIf you face any issue, reply with a screenshot and timestamp.\n\nReference: {ticket_id}\n\nBest regards,\nIT Support Team",
+    "tags": ["vpn", "access", "remote work"]
+  },
+  {
+    "id": "shared-drive-granted",
+    "title": "Shared Drive Permission Granted",
+    "category": "Access",
+    "subject": "Shared Drive Access Granted",
+    "body": "Hello {full_name},\n\nYour requested shared drive permissions are now active.\n\nPlease verify read/write behavior as requested and confirm back on this email.\nReference Ticket: {ticket_id}\n\nBest regards,\nIT Support Team",
+    "tags": ["shared drive", "permissions", "files"]
+  },
+  {
+    "id": "password-reset-standard",
+    "title": "Standard Password Reset",
+    "category": "Security",
+    "subject": "Password Reset Completed",
+    "body": "Hello {full_name},\n\nYour password has been reset.\n\nTemporary Password: {temp_password}\n\nPlease log in and set a new password immediately.\nIf login fails, reply to this email and we will assist.\n\nBest regards,\nIT Support Team",
+    "tags": ["password", "security", "reset"]
+  },
+  {
+    "id": "mfa-enrollment",
+    "title": "MFA Enrollment Required",
+    "category": "Security",
+    "subject": "Action Required - Complete MFA Enrollment",
+    "body": "Hello {full_name},\n\nTo improve account security, please complete MFA enrollment by end of day.\n\nEnrollment Link: https://example.local/mfa\n\nIf you need support during setup, contact IT Service Desk.\n\nBest regards,\nIT Support Team",
+    "tags": ["mfa", "security", "compliance"]
+  },
+  {
+    "id": "follow-up-pending",
+    "title": "Issue Follow-Up (Pending Response)",
+    "category": "Follow-up",
+    "subject": "Follow-up on Your Support Request",
+    "body": "Hello {full_name},\n\nThis is a follow-up regarding your support ticket ({ticket_id}).\n\nPlease let us know if the issue is resolved.\nIf still open, share an update and we will continue assisting.\n\nBest regards,\nIT Support Team",
+    "tags": ["follow-up", "pending", "ticket"]
+  },
+  {
+    "id": "incident-acknowledge",
+    "title": "Incident Acknowledgement",
+    "category": "Incident",
+    "subject": "We Have Received Your Incident Report",
+    "body": "Hello {full_name},\n\nWe have received your incident report and our team is investigating.\n\nReference Ticket: {ticket_id}\n\nWe will provide updates as soon as new information is available.\n\nBest regards,\nIT Support Team",
+    "tags": ["incident", "acknowledgement", "outage"]
+  },
+  {
+    "id": "software-install-complete",
+    "title": "Software Installation Completed",
+    "category": "Software",
+    "subject": "Requested Software Installation Completed",
+    "body": "Hello {full_name},\n\nThe requested software has been installed on your assigned device.\n\nPlease open the application and confirm it launches correctly.\nIf you need license activation help, reply to this email.\n\nBest regards,\nIT Support Team",
+    "tags": ["software", "installation", "license"]
+  },
+  {
+    "id": "license-assigned",
+    "title": "License Assignment Confirmation",
+    "category": "Software",
+    "subject": "Application License Assigned",
+    "body": "Hello {full_name},\n\nYour application license is now assigned to your account ({email}).\n\nPlease sign out and sign back in if the license features are not visible immediately.\n\nBest regards,\nIT Support Team",
+    "tags": ["license", "account", "provisioning"]
+  },
+  {
+    "id": "ticket-closure",
+    "title": "Ticket Closure Notice",
+    "category": "Closure",
+    "subject": "Support Ticket Closed",
+    "body": "Hello {full_name},\n\nAs we have not received further updates, your ticket ({ticket_id}) is now marked as closed.\n\nIf the issue reoccurs, reply to this email and we will reopen the request promptly.\n\nBest regards,\nIT Support Team",
+    "tags": ["closure", "support", "resolution"]
+  }
+]

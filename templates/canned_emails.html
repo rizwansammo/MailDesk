@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="card-shell">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3 library-toolbar">
+    <div>
+      <h2 class="h4 mb-1">Pre-Generated Email Database</h2>
+      <p class="mb-0 topbar-subtitle">Professional canned responses for daily IT support operations.</p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+      <button id="createNewBtn" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#createTemplateModal">Create New</button>
+      <button id="deleteSelectedBtn" class="btn btn-outline-danger" type="button" disabled>Delete Selected</button>
+      <a href="{{ url_for('generator') }}" class="btn btn-outline-primary">Open Full Generator</a>
+    </div>
+  </div>
+
+  <div class="row g-3" id="libraryGrid">
+    {% for item in canned_emails %}
+      <div class="col-xl-4 col-lg-6" data-canned-col="{{ item.id }}">
+        <article class="canned-card" data-canned-card="{{ item.id }}">
+          <div class="d-flex justify-content-between align-items-start mb-2 gap-2">
+            <div class="form-check">
+              <input class="form-check-input canned-select-checkbox" type="checkbox" value="{{ item.id }}" id="cannedSelect_{{ item.id }}">
+              <label class="form-check-label small" for="cannedSelect_{{ item.id }}">Select</label>
+            </div>
+            <span class="badge text-bg-light border">{{ item.category }}</span>
+        </div>
+
+          <button class="canned-open-btn text-start" type="button" data-canned-id="{{ item.id }}">
+            <h3 class="h6 mb-2">{{ item.title }}</h3>
+            <p class="small mb-2"><strong>Subject:</strong> {{ item.subject }}</p>
+            <p class="small text-muted canned-preview mb-3">{{ item.body }}</p>
+          </button>
+
+          <div class="d-flex flex-wrap gap-1">
+            {% for tag in item.tags %}
+              <span class="chip">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content cornered-modal">
+      <div class="modal-header">
+        <h3 class="modal-title h5" id="previewModalLabel">Template Preview</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <textarea id="libraryPreviewEditor" class="email-editor" placeholder="Template content will appear here. You can edit before copying."></textarea>
+      </div>
+      <div class="modal-footer d-flex justify-content-between flex-wrap gap-2">
+        <span id="libraryCopyStatus" class="small text-success opacity-0">Copied!</span>
+        <div class="d-flex gap-2">
+          <button id="copyLibraryBtn" class="btn btn-outline-primary" type="button" disabled>Copy</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createTemplateModal" tabindex="-1" aria-labelledby="createTemplateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <form id="createTemplateForm" class="modal-content cornered-modal">
+      <div class="modal-header">
+        <h3 class="modal-title h5" id="createTemplateModalLabel">Create New Canned Template</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="newTemplateName" class="form-label">Template Name</label>
+            <input id="newTemplateName" name="title" class="form-control" placeholder="e.g., Offboarding Access Revocation" required />
+          </div>
+          <div class="col-md-6">
+            <label for="newTemplateCategory" class="form-label">Category</label>
+            <input id="newTemplateCategory" name="category" class="form-control" placeholder="e.g., Security" />
+          </div>
+          <div class="col-md-6">
+            <label for="baseStandardTemplate" class="form-label">Base Standard Template</label>
+            <select id="baseStandardTemplate" class="form-select">
+              <option value="">None (start blank)</option>
+              {% for key, template in standard_templates.items() %}
+                <option value="{{ key }}">{{ template.label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="newTemplateTags" class="form-label">Tags</label>
+            <input id="newTemplateTags" name="tags" class="form-control" placeholder="onboarding, account, urgent" />
+          </div>
+          <div class="col-12">
+            <label for="newTemplateSubject" class="form-label">Subject</label>
+            <input id="newTemplateSubject" name="subject" class="form-control" placeholder="Enter email subject" required />
+          </div>
+          <div class="col-12">
+            <label for="newTemplateBody" class="form-label">Body</label>
+            <textarea id="newTemplateBody" name="body" class="form-control" rows="10" placeholder="Use placeholders like {full_name}, {email}, {ticket_id}" required></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-between flex-wrap gap-2">
+        <span id="createTemplateStatus" class="small text-success opacity-0">Template created</span>
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary">Create Template</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_config %}
+<script>
+  window.CANNED_EMAILS = {{ canned_emails | tojson }};
+  window.STANDARD_TEMPLATES = {{ standard_templates | tojson }};
+</script>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="{{ url_for('static', filename='js/canned_emails.js') }}"></script>
+{% endblock %}

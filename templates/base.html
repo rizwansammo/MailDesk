@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MailDesk | IT Email Template Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar-panel">
+      <div>
+        <div class="brand-wrap">
+          <div class="brand-logo">M</div>
+          <div>
+            <div class="brand-title">MailDesk</div>
+            <div class="brand-subtitle">IT Support Workspace</div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav mt-4">
+          <a href="{{ url_for('generator') }}" class="nav-link-item {% if active_page == 'generator' %}active{% endif %}">Email Generator</a>
+          <a href="{{ url_for('canned_emails_page') }}" class="nav-link-item {% if active_page == 'canned-emails' %}active{% endif %}">Canned Email Library</a>
+        </nav>
+      </div>
+
+      <div class="small sidebar-foot">Built for IT Support Efficiency</div>
+    </aside>
+
+    <section class="content-panel">
+      <header class="topbar-panel">
+        <div>
+          <h1 class="topbar-title mb-1">IT Email Template Generator</h1>
+          <p class="topbar-subtitle mb-0">Generate consistent IT support emails in seconds</p>
+        </div>
+        <div class="topbar-actions">
+          <button id="themeToggle" class="btn btn-sm btn-outline-primary px-3">Dark Mode</button>
+        </div>
+      </header>
+
+      <main class="page-content">
+        {% block content %}{% endblock %}
+      </main>
+
+      <footer class="small text-center footer-note py-3">
+        Built for IT Support Efficiency - {{ current_year }}
+      </footer>
+    </section>
+  </div>
+
+  {% block page_config %}{% endblock %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block page_scripts %}{% endblock %}
+</body>
+</html>
