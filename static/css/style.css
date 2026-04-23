@@ -347,6 +347,17 @@ html[data-theme="dark"] .btn-outline-danger:focus {
   color: #1a1f2c;
 }
 
+.placeholder-reference-box {
+  border: 1px dashed var(--border);
+  background: var(--surface-soft);
+  border-radius: 4px;
+  padding: 0.7rem;
+}
+
+.placeholder-token-btn {
+  font-family: "Consolas", "Courier New", monospace;
+}
+
 .footer-note {
   color: var(--text-muted);
 }

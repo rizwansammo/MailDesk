@@ -218,7 +218,11 @@ def safe_format(template_text: str, values: dict[str, str]) -> str:
     }
 
     default_values = {key: "{" + key + "}" for key in parsed_keys}
-    default_values.update(values)
+
+    for key, value in values.items():
+        if key in default_values and value.strip():
+            default_values[key] = value
+
     return template_text.format_map(default_values)
 
 
@@ -259,6 +263,7 @@ def canned_emails_page() -> str:
         "canned_emails.html",
         canned_emails=canned_items,
         standard_templates=standard_template_presets(),
+        field_definitions=FIELD_DEFINITIONS,
         current_year=datetime.now().year,
         active_page="canned-emails",
     )

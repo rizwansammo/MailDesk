@@ -12,6 +12,7 @@ const createTemplateStatus = document.getElementById("createTemplateStatus");
 const baseTemplateSelect = document.getElementById("baseStandardTemplate");
 const newTemplateSubject = document.getElementById("newTemplateSubject");
 const newTemplateBody = document.getElementById("newTemplateBody");
+const placeholderTokenButtons = document.querySelectorAll(".placeholder-token-btn");
 
 const previewModalElement = document.getElementById("previewModal");
 const createModalElement = document.getElementById("createTemplateModal");
@@ -84,6 +85,19 @@ function applyBaseTemplate() {
 
   newTemplateSubject.value = selected.subject || "";
   newTemplateBody.value = selected.body || "";
+}
+
+function insertAtCursor(textarea, token) {
+  const start = textarea.selectionStart ?? textarea.value.length;
+  const end = textarea.selectionEnd ?? textarea.value.length;
+  const before = textarea.value.slice(0, start);
+  const after = textarea.value.slice(end);
+
+  textarea.value = `${before}${token}${after}`;
+
+  const nextPos = start + token.length;
+  textarea.focus();
+  textarea.setSelectionRange(nextPos, nextPos);
 }
 
 async function createTemplate(event) {
@@ -175,6 +189,17 @@ function initLibraryPage() {
   if (baseTemplateSelect) {
     baseTemplateSelect.addEventListener("change", applyBaseTemplate);
   }
+
+  placeholderTokenButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const token = button.getAttribute("data-placeholder-token");
+      if (!token || !newTemplateBody) {
+        return;
+      }
+
+      insertAtCursor(newTemplateBody, token);
+    });
+  });
 
   previewEditor.addEventListener("input", () => {
     copyBtn.disabled = !previewEditor.value.trim();
