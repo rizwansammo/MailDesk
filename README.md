@@ -112,7 +112,7 @@ python -m venv .venv
 ### 2) Activate virtual environment
 
 ```powershell
-.\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate
 ```
 
 If PowerShell blocks script execution:
